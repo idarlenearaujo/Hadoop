@@ -28,7 +28,19 @@ def mapfn(k, v):
 
 # REDUCE
 def reducefn(k, v):
-    return v
+    total = 0
+    for ks, vs in enumerate(v):
+        if vs.split(':')[0] == 'Vendas':
+            # total de venda por filial
+            total = int(vs.split(':')[1]) + total
+        if vs.split(':')[0] == 'Filial':
+            # nome filial
+            NomeFilial = vs.split(':')[1]
+
+    # lista com resultados
+    L = list()
+    L.append(NomeFilial + ' , ' + str(total))
+    return L
 
 # Server
 s = mincemeat.Server()
@@ -39,8 +51,7 @@ s.reducefn = reducefn
 # result
 result = s.run_server(password='changeme')
 
-w = csv.writer(open('result.csv', 'w'))
+w = csv.writer(open('result2.csv', 'w'))
 
 for k, v in result.items():
-    w.writerow([k, v])
-
+    w.writerow([k, str(v).replace('[', '').replace(']', '').replace("'", '').replace(' ', '')])
