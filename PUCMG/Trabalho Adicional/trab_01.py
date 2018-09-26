@@ -58,7 +58,6 @@ results = s.run_server(password="changeme")
 
 w = csv.writer(open('result2.csv', 'w'))
 
-L = list()
 P = {}
 P2 = {}
 G = {}
@@ -84,10 +83,12 @@ for item in G.values():
     for dict_item in sorted(item, key=item.get, reverse=True):
         M.append(item[dict_item])
 
+    # máximo
     maximo = max(M)
 
+    # escrever palavras resultantes
     for dict_item in sorted(item, key=item.get, reverse=True):
         if item[dict_item] == maximo:
-            print(dict_item)
+            w.writerow([dict_item])
 
     M = list()
