@@ -3,7 +3,7 @@ import csv
 import mincemeat
 
 # lista de todos os nomes de arquivos dentro da pasta selecionada
-arquivos = glob.glob('..\\textos\\*')
+arquivos = glob.glob('textos\\*')
 
 # abre o arquivo em questão e retorna seu conteudo a variável source e o fecha por fim
 def ler_arquivos(file_name):
@@ -45,7 +45,7 @@ s.reducefn = reducefn
 # A saída de cada função de reduce é adicionada ao final de um arquivo de saída para aquela partição de reduce.
 result = s.run_server(password='changeme')
 
-w = csv.writer(open('..\\textos\\resultado.csv', 'w'))
+w = csv.writer(open('resultado.csv', 'w'))
 
 for k, v in result.items():
     w.writerow([k, v])
